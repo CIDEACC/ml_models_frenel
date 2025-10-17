@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Tree Decision &#8212; Machine Learning Models - FRENEL</title>
+    <title>Clasificador Bayesiano &#8212; Machine Learning Models - FRENEL</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tree_decision';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'bayesiano';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Random Forest" href="random_forest.html" />
-    <link rel="prev" title="Clasificador Bayesiano" href="bayesiano.html" />
+    <link rel="next" title="Tree Decision" href="tree_decision.html" />
+    <link rel="prev" title="FRENEL: Factores de Riesgo de Enfermedad Nefrológica en Latinoamérica" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,8 +180,8 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="bayesiano.html"><strong>Clasificador Bayesiano</strong></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Tree Decision</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Clasificador Bayesiano</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="tree_decision.html"><strong>Tree Decision</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="random_forest.html"><strong>Random Forest</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="xgboost.html"><strong>XGBoost</strong></a></li>
 </ul>
@@ -255,7 +255,7 @@
       
       
       
-      <li><a href="https://github.com/CIDEACC/ml_models_frenel/issues/new?title=Issue%20on%20page%20%2Ftree_decision.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/CIDEACC/ml_models_frenel/issues/new?title=Issue%20on%20page%20%2Fbayesiano.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -285,7 +285,7 @@
       
       
       
-      <li><a href="_sources/tree_decision.ipynb" target="_blank"
+      <li><a href="_sources/bayesiano.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -369,7 +369,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Tree Decision</h1>
+    <h1>Clasificador Bayesiano</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -388,7 +388,6 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo"><strong>Modelo</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjuntos-de-train-y-test"><strong>Conjuntos de <code class="docutils literal notranslate"><span class="pre">Train</span></code> y <code class="docutils literal notranslate"><span class="pre">Test</span></code></strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-modelo"><strong>Implementación Modelo</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-y-resultados"><strong>Métricas y Resultados</strong></a></li>
 </ul>
 </li>
@@ -403,8 +402,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="tree-decision">
-<h1><strong>Tree Decision</strong><a class="headerlink" href="#tree-decision" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="clasificador-bayesiano">
+<h1><strong>Clasificador Bayesiano</strong><a class="headerlink" href="#clasificador-bayesiano" title="Link to this heading">#</a></h1>
 <section id="librerias">
 <h2><strong>Librerías</strong><a class="headerlink" href="#librerias" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -426,7 +425,7 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_selection</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">CategoricalNB</span>
 </pre></div>
 </div>
 </div>
@@ -640,11 +639,14 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">encoder</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">sparse_output</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>  <span class="c1">#La salida será una matriz densa (DataFrame de Pandas)</span>
-<span class="n">encoded</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">cat_cols</span><span class="p">])</span>
-<span class="n">df_encoded</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">encoded</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">(</span><span class="n">cat_cols</span><span class="p">))</span>
-<span class="n">df_modelo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df_encoded</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># axis = 1: Indica que las columnas especificadas deben ser eliminadas</span>
-<span class="n">df_modelo</span> <span class="o">=</span> <span class="n">df_modelo</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">cat_cols</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_encoded</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cat_cols</span><span class="p">,</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_modelo</span> <span class="o">=</span> <span class="n">df_encoded</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -678,34 +680,34 @@ Test set size: (1189, 68)
 </div>
 </div>
 </div>
-</section>
-<section id="implementacion-modelo">
-<h3><strong>Implementación Modelo</strong><a class="headerlink" href="#implementacion-modelo" title="Link to this heading">#</a></h3>
-<p><strong>Variables seleccionadas por el <code class="docutils literal notranslate"><span class="pre">SelectKbest</span></code>:</strong> con estas 25 variables se entrenará el modelo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">SelectKBest</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">25</span><span class="p">),</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">11</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pipeline con Categorical Naive Bayes</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">SelectKBest</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">25</span><span class="p">),</span> <span class="n">CategoricalNB</span><span class="p">())</span>
+
+<span class="c1"># Hiperparámetros a ajustar</span>
 <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;decisiontreeclassifier__max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
-    <span class="s1">&#39;decisiontreeclassifier__min_samples_split&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
-    <span class="s1">&#39;decisiontreeclassifier__min_samples_leaf&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
-    <span class="s1">&#39;decisiontreeclassifier__criterion&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;gini&#39;</span><span class="p">,</span> <span class="s1">&#39;entropy&#39;</span><span class="p">]</span>
+    <span class="s1">&#39;categoricalnb__alpha&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>  <span class="c1"># suavizado de Laplace</span>
+    <span class="s1">&#39;categoricalnb__fit_prior&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
 <span class="p">}</span>
 
+<span class="c1"># Grid Search optimizando el recall</span>
 <span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;recall&#39;</span><span class="p">)</span>
+
+<span class="c1"># Entrenamiento</span>
 <span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-
+<span class="c1"># Resultados</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejores parámetros:&quot;</span><span class="p">,</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejor Recall en Train:&quot;</span><span class="p">,</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejor Recall en Test:&quot;</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)))</span> <span class="c1"># Ese es el promedio de los 5 folds</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejor Recall en Test:&quot;</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mejores parámetros: {&#39;decisiontreeclassifier__criterion&#39;: &#39;gini&#39;, &#39;decisiontreeclassifier__max_depth&#39;: 7, &#39;decisiontreeclassifier__min_samples_leaf&#39;: 5, &#39;decisiontreeclassifier__min_samples_split&#39;: 2}
-Mejor Recall en Train: 0.6201202509585221
-Mejor Recall en Test: 0.6047430830039525
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mejores parámetros: {&#39;categoricalnb__alpha&#39;: 0.01, &#39;categoricalnb__fit_prior&#39;: False}
+Mejor Recall en Train: 0.6292697804112931
+Mejor Recall en Test: 0.5573122529644269
 </pre></div>
 </div>
 </div>
@@ -722,10 +724,10 @@ Mejor Recall en Test: 0.6047430830039525
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x2a5754f6bd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x1db01020610&gt;
 </pre></div>
 </div>
-<img alt="_images/0afc9fd733a8873dc79e0b014d8825291091b6c44bf623f8f44d0696095460cf.png" src="_images/0afc9fd733a8873dc79e0b014d8825291091b6c44bf623f8f44d0696095460cf.png" />
+<img alt="_images/d7c09d9987a4c216ad2ebffaedd819fafdacd5afb1d6ab628eb250bf096f8de3.png" src="_images/d7c09d9987a4c216ad2ebffaedd819fafdacd5afb1d6ab628eb250bf096f8de3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -794,18 +796,18 @@ Mejor Recall en Test: 0.6047430830039525
     <tr>
       <th>0</th>
       <td>Train</td>
-      <td>0.434053</td>
-      <td>0.716359</td>
-      <td>0.540567</td>
-      <td>0.814546</td>
+      <td>0.371055</td>
+      <td>0.635884</td>
+      <td>0.468644</td>
+      <td>0.735985</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Test</td>
-      <td>0.370460</td>
-      <td>0.604743</td>
-      <td>0.459459</td>
-      <td>0.716257</td>
+      <td>0.334917</td>
+      <td>0.557312</td>
+      <td>0.418398</td>
+      <td>0.711528</td>
     </tr>
   </tbody>
 </table>
@@ -813,39 +815,32 @@ Mejor Recall en Test: 0.6047430830039525
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Entrena el mejor modelo encontrado</span>
-<span class="n">best_model</span> <span class="o">=</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_estimator_</span>
-
-<span class="c1"># Recuperar el SelectKBest y el árbol</span>
-<span class="n">selector</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;selectkbest&#39;</span><span class="p">]</span>
-<span class="n">tree</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;decisiontreeclassifier&#39;</span><span class="p">]</span>
-
-<span class="c1"># Obtener nombres de las variables seleccionadas</span>
-<span class="n">feature_names</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">columns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Obtener las puntuaciones de SelectKBest</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="n">scores_</span>
 <span class="n">selected_features</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">[</span><span class="n">selector</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
 
-<span class="c1"># Importancias</span>
-<span class="n">importances</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">feature_importances_</span>
+<span class="c1"># Ordenar las variables seleccionadas por score descendente</span>
+<span class="n">sorted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="n">selector</span><span class="o">.</span><span class="n">get_support</span><span class="p">()])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="c1"># Ordenar de mayor a menor</span>
-<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">importances</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
+<span class="c1"># Elegir las top N</span>
 <span class="n">top_n</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">top_indices</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[:</span><span class="n">top_n</span><span class="p">]</span>
+<span class="n">top_indices</span> <span class="o">=</span> <span class="n">sorted_indices</span><span class="p">[:</span><span class="n">top_n</span><span class="p">]</span>
+<span class="n">top_scores</span> <span class="o">=</span> <span class="n">scores</span><span class="p">[</span><span class="n">selector</span><span class="o">.</span><span class="n">get_support</span><span class="p">()][</span><span class="n">top_indices</span><span class="p">]</span>
+<span class="n">top_features</span> <span class="o">=</span> <span class="n">selected_features</span><span class="p">[</span><span class="n">top_indices</span><span class="p">]</span>
 
 <span class="c1"># Graficar</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">top_n</span><span class="p">),</span> <span class="n">importances</span><span class="p">[</span><span class="n">top_indices</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">top_n</span><span class="p">),</span> <span class="n">selected_features</span><span class="p">[</span><span class="n">top_indices</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Importancia&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Top </span><span class="si">{</span><span class="n">top_n</span><span class="si">}</span><span class="s1"> características más importantes - Tree Decision&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">top_n</span><span class="p">),</span> <span class="n">top_scores</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">top_n</span><span class="p">),</span> <span class="n">top_features</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Score (Chi² o ANOVA)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Top </span><span class="si">{</span><span class="n">top_n</span><span class="si">}</span><span class="s1"> características más relevantes según SelectKBest&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/af0b9f7f27c9aa72ab0fd2355ee89c7731e7feda78fec7cbffaffb481396b9ba.png" src="_images/af0b9f7f27c9aa72ab0fd2355ee89c7731e7feda78fec7cbffaffb481396b9ba.png" />
+<img alt="_images/2e34f56d6a0be70c2fa912b46e64b4ce927ffd289b9841fb0871fd07cca89516.png" src="_images/2e34f56d6a0be70c2fa912b46e64b4ce927ffd289b9841fb0871fd07cca89516.png" />
 </div>
 </div>
 </section>
@@ -883,20 +878,20 @@ Mejor Recall en Test: 0.6047430830039525
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="bayesiano.html"
+       href="intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>Clasificador Bayesiano</strong></p>
+        <p class="prev-next-title"><strong>FRENEL: Factores de Riesgo de Enfermedad Nefrológica en Latinoamérica</strong></p>
       </div>
     </a>
     <a class="right-next"
-       href="random_forest.html"
+       href="tree_decision.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Random Forest</strong></p>
+        <p class="prev-next-title"><strong>Tree Decision</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -925,7 +920,6 @@ Mejor Recall en Test: 0.6047430830039525
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo"><strong>Modelo</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjuntos-de-train-y-test"><strong>Conjuntos de <code class="docutils literal notranslate"><span class="pre">Train</span></code> y <code class="docutils literal notranslate"><span class="pre">Test</span></code></strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-modelo"><strong>Implementación Modelo</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-y-resultados"><strong>Métricas y Resultados</strong></a></li>
 </ul>
 </li>
