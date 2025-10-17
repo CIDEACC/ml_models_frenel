@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to your Jupyter Book &#8212; My sample book</title>
+    <title>FRENEL: Factores de Riesgo de Enfermedad Nefrológica en Latinoamérica &#8212; Machine Learning Models - FRENEL</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -57,12 +57,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Markdown Files" href="markdown.html" />
+    <link rel="next" title="Librerías" href="modelo_k.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,8 +154,8 @@
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+    <img src="_static/logo_cideacc.png" class="logo__image only-light" alt="Machine Learning Models - FRENEL - Home"/>
+    <script>document.write(`<img src="_static/logo_cideacc.png" class="logo__image only-dark" alt="Machine Learning Models - FRENEL - Home"/>`);</script>
   
   
 </a></div>
@@ -178,14 +176,17 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Welcome to your Jupyter Book
+                    FRENEL: Factores de Riesgo de Enfermedad Nefrológica en Latinoamérica
                 </a>
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelo_k.html"><strong>Librerías</strong></a></li>
+
+
+
+
+
 </ul>
 
     </div>
@@ -240,7 +241,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+      <li><a href="https://github.com/CIDEACC/ml_models_frenel" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -257,7 +258,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/CIDEACC/ml_models_frenel/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -287,7 +288,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/intro.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -297,7 +298,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -358,7 +359,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -369,11 +372,20 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome to your Jupyter Book</h1>
+    <h1>FRENEL: Factores de Riesgo de Enfermedad Nefrológica en Latinoamérica</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion"><strong>Introducción</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos"><strong>Objetivos</strong></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -383,19 +395,29 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-your-jupyter-book">
-<h1>Welcome to your Jupyter Book<a class="headerlink" href="#welcome-to-your-jupyter-book" title="Link to this heading">#</a></h1>
-<p>This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out <a class="reference external" href="https://jupyterbook.org">the Jupyter Book documentation</a> for more information.</p>
-<p>Check out the content pages bundled with this sample book to see more.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+  <section class="tex2jax_ignore mathjax_ignore" id="frenel-factores-de-riesgo-de-enfermedad-nefrologica-en-latinoamerica">
+<h1><strong>FRENEL: Factores de Riesgo de Enfermedad Nefrológica en Latinoamérica</strong><a class="headerlink" href="#frenel-factores-de-riesgo-de-enfermedad-nefrologica-en-latinoamerica" title="Link to this heading">#</a></h1>
+<section id="introduccion">
+<h2><strong>Introducción</strong><a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
+<p align="justify">
+ La enfermedad renal crónica (ERC) es un problema creciente de salud pública global, con una prevalencia estimada en 13.4%, similar a la de la diabetes, su principal causa. En poblaciones vulnerables, afrodescendientes, indígenas y agrícolas de América Latina, se observa alta prevalencia, frecuentemente no diagnosticada ni tratada. No obstante, los programas actuales se enfocan casi exclusivamente en factores clínicos
+ individuales, desatendiendo factores sociales y estructurales. Para reducir efectivamente la carga de ERC en regiones de ingresos bajos y medios, es clave integrar factores sociales, económicos, culturales, ambientales y geográficos en estrategias de prevención y control. Por ello, se requiere generar evidencia específica que analice su impacto en la salud renal de estas poblaciones, para diseñar intervenciones más precisas, eficaces y equitativas, adaptadas a sus realidades.
+</p>
+<div style="text-align: center;">
+    <img src="https://github.com/CIDEACC/datos_externos_convocatoria38/blob/main/imagen_introduccion.png?raw=true" alt= " " width="600"/>
+</div>
+</section>
+<section id="objetivos">
+<h2><strong>Objetivos</strong><a class="headerlink" href="#objetivos" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Evaluar los factores de riesgo asociados con la ERC  en poblaciones en vulnerabilidad sanitaria, incluyendo a las afrodescendientes, indígenas y agrícolas en América Latina.</p></li>
+<li><p>Describir el perfil sociodemográfico y los antecedentes médicos relevantes en las personas de las poblaciones descritas de América Latina.</p></li>
+<li><p>Determinar la relación entre hábitos de vida, estrato social, consumo de tabaco y alcohol, y la función renal en las poblaciones descritas en América Latina.</p></li>
+<li><p>Investigar el vínculo entre trabajo agrícola y la aparición de enfermedades renales en las poblaciones descritas de América Latina.</p></li>
+<li><p>Analizar la influencia de los antecedentes familiares en la predisposición a desarrollar ERC en las poblaciones descritas de América latina.</p></li>
 </ul>
+</section>
+<div class="toctree-wrapper compound">
 </div>
 </section>
 
@@ -430,11 +452,11 @@ It does not go in-depth into any particular topic - check out <a class="referenc
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="markdown.html"
+       href="modelo_k.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Markdown Files</p>
+        <p class="prev-next-title"><strong>Librerías</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -445,6 +467,22 @@ It does not go in-depth into any particular topic - check out <a class="referenc
             
             
               
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion"><strong>Introducción</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos"><strong>Objetivos</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
             
           </div>
           <footer class="bd-footer-content">
@@ -454,7 +492,7 @@ It does not go in-depth into any particular topic - check out <a class="referenc
   <div class="footer-item">
     
 <p class="component-author">
-By The Jupyter Book Community
+By CIDEACC
 </p>
 
   </div>
