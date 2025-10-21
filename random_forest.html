@@ -184,6 +184,7 @@
 <li class="toctree-l1"><a class="reference internal" href="tree_decision.html"><strong>Tree Decision</strong></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Random Forest</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="xgboost.html"><strong>XGBoost</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="lasso.html"><strong>Lasso</strong></a></li>
 </ul>
 
     </div>
@@ -438,7 +439,7 @@ document.write(`
 <h2><strong>Data</strong><a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../data/processed/df_to_model_frenel_15102025.xlsx&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../data/processed/df_to_model_frenel_21102025.xlsx&quot;</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -547,7 +548,7 @@ document.write(`
       <td>Asegurador público</td>
       <td>Comerciante</td>
       <td>...</td>
-      <td>SI</td>
+      <td>NO</td>
       <td>NO</td>
       <td>AFRODESCENDANT</td>
       <td>NO</td>
@@ -571,7 +572,7 @@ document.write(`
       <td>Asegurador público</td>
       <td>Comerciante</td>
       <td>...</td>
-      <td>NO</td>
+      <td>SI</td>
       <td>NO</td>
       <td>AFRODESCENDANT</td>
       <td>NO</td>
@@ -674,10 +675,10 @@ Numéricas: 7
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> X_train.shape: (3567, 64)
- X_test.shape: (1189, 64)
- y_train.shape: (3567,)
- y_test.shape: (1189,)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> X_train.shape: (3657, 64)
+ X_test.shape: (1219, 64)
+ y_train.shape: (3657,)
+ y_test.shape: (1219,)
 </pre></div>
 </div>
 </div>
@@ -742,176 +743,176 @@ Numéricas: 7
     <tr>
       <th>0</th>
       <td>edad</td>
-      <td>352.510702</td>
-      <td>6.323705e-76</td>
+      <td>333.387941</td>
+      <td>4.243896e-72</td>
       <td>True</td>
     </tr>
     <tr>
       <th>47</th>
       <td>medicinas_presion_arterial_SI</td>
-      <td>256.782815</td>
-      <td>2.517594e-56</td>
+      <td>230.862300</td>
+      <td>5.602328e-51</td>
       <td>True</td>
     </tr>
     <tr>
       <th>39</th>
       <td>antecedentes_presion_alta_SI</td>
-      <td>236.618258</td>
-      <td>3.805371e-52</td>
+      <td>214.708219</td>
+      <td>1.311539e-47</td>
       <td>True</td>
     </tr>
     <tr>
       <th>54</th>
       <td>tirilla_reactiva_SI</td>
-      <td>130.586165</td>
-      <td>7.458186e-30</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>43</th>
-      <td>antecedentes_enfermedad_circulatoria_SI</td>
-      <td>114.182136</td>
-      <td>2.362039e-26</td>
+      <td>132.651579</td>
+      <td>2.650115e-30</td>
       <td>True</td>
     </tr>
     <tr>
       <th>18</th>
       <td>regimen_salud_Asegurador público</td>
-      <td>100.359432</td>
-      <td>2.165306e-23</td>
+      <td>108.001861</td>
+      <td>4.895375e-25</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>antecedentes_enfermedad_circulatoria_SI</td>
+      <td>104.392127</td>
+      <td>2.910762e-24</td>
       <td>True</td>
     </tr>
     <tr>
       <th>19</th>
       <td>regimen_salud_No asegurado</td>
-      <td>80.931277</td>
-      <td>3.313030e-19</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>grupo_origen_AGRICOLA</td>
-      <td>80.799835</td>
-      <td>3.536951e-19</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>grupo_etnico_MESTIZO</td>
-      <td>74.745624</td>
-      <td>7.216961e-18</td>
+      <td>99.088428</td>
+      <td>4.008855e-23</td>
       <td>True</td>
     </tr>
     <tr>
       <th>44</th>
       <td>medicinas_para_diabetes_SI</td>
-      <td>71.248038</td>
-      <td>4.133727e-17</td>
+      <td>62.698312</td>
+      <td>2.961131e-15</td>
       <td>True</td>
     </tr>
     <tr>
       <th>40</th>
       <td>paciente_diabetico_SI</td>
-      <td>69.990533</td>
-      <td>7.746695e-17</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>58</th>
-      <td>hogar_sercicios_basicos_SI</td>
-      <td>61.704289</td>
-      <td>4.898723e-15</td>
+      <td>60.016325</td>
+      <td>1.136820e-14</td>
       <td>True</td>
     </tr>
     <tr>
       <th>3</th>
       <td>presion_arterial_sistolica</td>
-      <td>58.931382</td>
-      <td>1.968887e-14</td>
+      <td>58.286667</td>
+      <td>2.709282e-14</td>
       <td>True</td>
     </tr>
     <tr>
-      <th>48</th>
-      <td>medicinas_colesterol_alto_SI</td>
-      <td>47.940422</td>
-      <td>4.978834e-12</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>62</th>
-      <td>hogar_migrantes_SI</td>
-      <td>46.923023</td>
-      <td>8.323468e-12</td>
+      <th>6</th>
+      <td>grupo_origen_AGRICOLA</td>
+      <td>57.344754</td>
+      <td>4.348841e-14</td>
       <td>True</td>
     </tr>
     <tr>
       <th>30</th>
       <td>toma_hasta_embriagarse_NO APLICA</td>
-      <td>45.935572</td>
-      <td>1.371027e-11</td>
+      <td>49.631172</td>
+      <td>2.114099e-12</td>
       <td>True</td>
     </tr>
     <tr>
       <th>50</th>
       <td>diagnostico_proteina_sangre_orina_SI</td>
-      <td>38.177335</td>
-      <td>6.999224e-10</td>
+      <td>46.142646</td>
+      <td>1.231261e-11</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>medicinas_colesterol_alto_SI</td>
+      <td>44.266576</td>
+      <td>3.180969e-11</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>grupo_etnico_MESTIZO</td>
+      <td>43.973558</td>
+      <td>3.689666e-11</td>
       <td>True</td>
     </tr>
     <tr>
       <th>38</th>
       <td>antecedentes_anemia_SI</td>
-      <td>33.824610</td>
-      <td>6.425759e-09</td>
+      <td>39.383746</td>
+      <td>3.783588e-10</td>
       <td>True</td>
     </tr>
     <tr>
-      <th>10</th>
-      <td>grupo_etnico_INDIGENA</td>
-      <td>29.290203</td>
-      <td>6.537121e-08</td>
+      <th>62</th>
+      <td>hogar_migrantes_SI</td>
+      <td>36.970332</td>
+      <td>1.290869e-09</td>
       <td>True</td>
     </tr>
     <tr>
-      <th>59</th>
-      <td>hogar_tecnologias_SI</td>
-      <td>26.738387</td>
-      <td>2.425077e-07</td>
+      <th>58</th>
+      <td>hogar_sercicios_basicos_SI</td>
+      <td>29.028376</td>
+      <td>7.468192e-08</td>
       <td>True</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>grupo_origen_INDIGENA</td>
-      <td>25.645673</td>
-      <td>4.257245e-07</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>49</th>
-      <td>diagnostico_insuficiencia_renal_cronica_SI</td>
-      <td>25.211491</td>
-      <td>5.325372e-07</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>presion_arterial_diastolica</td>
-      <td>23.114437</td>
-      <td>1.573506e-06</td>
-      <td>True</td>
-    </tr>
-    <tr>
-      <th>42</th>
-      <td>antecedentes_insuficiencia_cardiaca_SI</td>
-      <td>22.952194</td>
-      <td>1.711357e-06</td>
+      <th>45</th>
+      <td>diabetes_durante_embarazo_No aplica</td>
+      <td>26.834533</td>
+      <td>2.305726e-07</td>
       <td>True</td>
     </tr>
     <tr>
       <th>5</th>
       <td>imc</td>
-      <td>20.488381</td>
-      <td>6.145925e-06</td>
+      <td>26.504123</td>
+      <td>2.733183e-07</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>antecedentes_insuficiencia_cardiaca_SI</td>
+      <td>24.623088</td>
+      <td>7.208460e-07</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>presion_arterial_diastolica</td>
+      <td>23.972700</td>
+      <td>1.008681e-06</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>hogar_tecnologias_SI</td>
+      <td>21.539625</td>
+      <td>3.556850e-06</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>talla</td>
+      <td>19.729364</td>
+      <td>9.119492e-06</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>transfusiones_previas_SI</td>
+      <td>10.193577</td>
+      <td>1.418269e-03</td>
       <td>True</td>
     </tr>
   </tbody>
@@ -967,6 +968,8 @@ Numéricas: 7
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 216 candidates, totalling 1080 fits
+Mejores Parámetros RF: {&#39;max_depth&#39;: 10, &#39;max_features&#39;: &#39;log2&#39;, &#39;min_samples_leaf&#39;: 4, &#39;min_samples_split&#39;: 10, &#39;n_estimators&#39;: 300}
+Mejor Recall en Validación Cruzada: 0.5235852500912742
 </pre></div>
 </div>
 </div>
@@ -995,18 +998,18 @@ Numéricas: 7
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📌 MÉTRICAS EN TRAIN
-Recall Train: 0.7915567282321899
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MÉTRICAS EN TRAIN
+Recall Train: 0.8082026537997588
 
 Reporte de Clasificación (Train):
               precision    recall  f1-score   support
 
-           0       0.94      0.88      0.91      2809
-           1       0.63      0.79      0.70       758
+           0       0.94      0.90      0.92      2828
+           1       0.69      0.81      0.75       829
 
-    accuracy                           0.86      3567
-   macro avg       0.79      0.83      0.80      3567
-weighted avg       0.87      0.86      0.86      3567
+    accuracy                           0.88      3657
+   macro avg       0.82      0.85      0.83      3657
+weighted avg       0.88      0.88      0.88      3657
 </pre></div>
 </div>
 </div>
@@ -1023,18 +1026,18 @@ weighted avg       0.87      0.86      0.86      3567
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📌 MÉTRICAS EN TEST
-Recall Test: 0.5849802371541502
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MÉTRICAS EN TEST
+Recall Test: 0.5217391304347826
 
 Reporte de Clasificación (Test):
               precision    recall  f1-score   support
 
-           0       0.88      0.82      0.85       936
-           1       0.47      0.58      0.52       253
+           0       0.86      0.83      0.84       943
+           1       0.48      0.52      0.50       276
 
-    accuracy                           0.77      1189
-   macro avg       0.68      0.70      0.69      1189
-weighted avg       0.79      0.77      0.78      1189
+    accuracy                           0.76      1219
+   macro avg       0.67      0.68      0.67      1219
+weighted avg       0.77      0.76      0.77      1219
 </pre></div>
 </div>
 </div>
@@ -1054,7 +1057,7 @@ weighted avg       0.79      0.77      0.78      1189
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/93536f4f7176d3580bdea0170b4f6ba9361d4492d27190e0b65861f88aa8339f.png" src="_images/93536f4f7176d3580bdea0170b4f6ba9361d4492d27190e0b65861f88aa8339f.png" />
+<img alt="_images/4e1ff790f749726ec2232a7dfb3e6c6818c0a06274270b31fa5efc9b5e772a2f.png" src="_images/4e1ff790f749726ec2232a7dfb3e6c6818c0a06274270b31fa5efc9b5e772a2f.png" />
 </div>
 </div>
 </section>

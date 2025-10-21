@@ -184,6 +184,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Tree Decision</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="random_forest.html"><strong>Random Forest</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="xgboost.html"><strong>XGBoost</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="lasso.html"><strong>Lasso</strong></a></li>
 </ul>
 
     </div>
@@ -436,7 +437,7 @@ document.write(`
 <h2><strong>Data</strong><a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../data/processed/df_to_model_frenel_15102025.xlsx&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;../data/processed/df_to_model_frenel_21102025.xlsx&quot;</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -545,7 +546,7 @@ document.write(`
       <td>Asegurador público</td>
       <td>Comerciante</td>
       <td>...</td>
-      <td>SI</td>
+      <td>NO</td>
       <td>NO</td>
       <td>AFRODESCENDANT</td>
       <td>NO</td>
@@ -569,7 +570,7 @@ document.write(`
       <td>Asegurador público</td>
       <td>Comerciante</td>
       <td>...</td>
-      <td>NO</td>
+      <td>SI</td>
       <td>NO</td>
       <td>AFRODESCENDANT</td>
       <td>NO</td>
@@ -672,8 +673,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train set size: (3567, 68)
-Test set size: (1189, 68)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train set size: (3657, 68)
+Test set size: (1219, 68)
 </pre></div>
 </div>
 </div>
@@ -689,12 +690,10 @@ Test set size: (1189, 68)
     <span class="s1">&#39;decisiontreeclassifier__max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
     <span class="s1">&#39;decisiontreeclassifier__min_samples_split&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
     <span class="s1">&#39;decisiontreeclassifier__min_samples_leaf&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
-    <span class="s1">&#39;decisiontreeclassifier__criterion&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;gini&#39;</span><span class="p">,</span> <span class="s1">&#39;entropy&#39;</span><span class="p">]</span>
-<span class="p">}</span>
+    <span class="s1">&#39;decisiontreeclassifier__criterion&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;gini&#39;</span><span class="p">,</span> <span class="s1">&#39;entropy&#39;</span><span class="p">]}</span>
 
 <span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;recall&#39;</span><span class="p">)</span>
 <span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejores parámetros:&quot;</span><span class="p">,</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejor Recall en Train:&quot;</span><span class="p">,</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
@@ -703,9 +702,9 @@ Test set size: (1189, 68)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mejores parámetros: {&#39;decisiontreeclassifier__criterion&#39;: &#39;gini&#39;, &#39;decisiontreeclassifier__max_depth&#39;: 7, &#39;decisiontreeclassifier__min_samples_leaf&#39;: 5, &#39;decisiontreeclassifier__min_samples_split&#39;: 2}
-Mejor Recall en Train: 0.6201202509585221
-Mejor Recall en Test: 0.6047430830039525
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mejores parámetros: {&#39;decisiontreeclassifier__criterion&#39;: &#39;gini&#39;, &#39;decisiontreeclassifier__max_depth&#39;: 5, &#39;decisiontreeclassifier__min_samples_leaf&#39;: 1, &#39;decisiontreeclassifier__min_samples_split&#39;: 2}
+Mejor Recall en Train: 0.6586564439576488
+Mejor Recall en Test: 0.6594202898550725
 </pre></div>
 </div>
 </div>
@@ -722,10 +721,10 @@ Mejor Recall en Test: 0.6047430830039525
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x2a5754f6bd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x29d703fd010&gt;
 </pre></div>
 </div>
-<img alt="_images/0afc9fd733a8873dc79e0b014d8825291091b6c44bf623f8f44d0696095460cf.png" src="_images/0afc9fd733a8873dc79e0b014d8825291091b6c44bf623f8f44d0696095460cf.png" />
+<img alt="_images/04499bf2e858dc28186b37a6c12bbd56bd5de0b00bf477f2966038ac3a300d8d.png" src="_images/04499bf2e858dc28186b37a6c12bbd56bd5de0b00bf477f2966038ac3a300d8d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -794,18 +793,18 @@ Mejor Recall en Test: 0.6047430830039525
     <tr>
       <th>0</th>
       <td>Train</td>
-      <td>0.434053</td>
-      <td>0.716359</td>
-      <td>0.540567</td>
-      <td>0.814546</td>
+      <td>0.393090</td>
+      <td>0.727382</td>
+      <td>0.510368</td>
+      <td>0.759559</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Test</td>
-      <td>0.370460</td>
-      <td>0.604743</td>
-      <td>0.459459</td>
-      <td>0.716257</td>
+      <td>0.383966</td>
+      <td>0.659420</td>
+      <td>0.485333</td>
+      <td>0.718346</td>
     </tr>
   </tbody>
 </table>
@@ -845,7 +844,7 @@ Mejor Recall en Test: 0.6047430830039525
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/af0b9f7f27c9aa72ab0fd2355ee89c7731e7feda78fec7cbffaffb481396b9ba.png" src="_images/af0b9f7f27c9aa72ab0fd2355ee89c7731e7feda78fec7cbffaffb481396b9ba.png" />
+<img alt="_images/f70f08de6fad89cafbe0d0cbce962b55f9d0a1cb8dd62f95306e3db3d1b2d06d.png" src="_images/f70f08de6fad89cafbe0d0cbce962b55f9d0a1cb8dd62f95306e3db3d1b2d06d.png" />
 </div>
 </div>
 </section>
